@@ -87,6 +87,19 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  let
+  my-python-packages = p: with p; [
+    json
+    pandas
+    requests
+    # other python packages
+  ];
+  in
+  environment.systemPackages = [
+  (pkgs.python3.withPackages my-python-packages)
+  ];
+
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jsfillman = {
     isNormalUser = true;
@@ -95,6 +108,7 @@
     packages = with pkgs; [
       firefox
       kate
+      # kdeconnect-kde # Seems Broken
     #  thunderbird
     ];
   };
@@ -106,14 +120,25 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     brave
+    calibre
     chromium
+    # helm # This is cool little softsynth to play with later, but need the k8s command for now
+    kubecolor
+    kubectl
+    kubernetes-helm
     fish
     foliate
     git
     htop
+    jetbrains.datagrip
+    jetbrains.goland
+    jetbrains.idea-ultimate
     jetbrains.pycharm-professional
+    jetbrains.webstorm
     nordic
     opera
+    python3
+    python.pkgs.pip
     slack
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
