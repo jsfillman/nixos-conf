@@ -87,19 +87,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  let
-  my-python-packages = p: with p; [
-    json
-    pandas
-    requests
-    # other python packages
-  ];
-  in
-  environment.systemPackages = [
-  (pkgs.python3.withPackages my-python-packages)
-  ];
-
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jsfillman = {
     isNormalUser = true;
@@ -123,6 +110,7 @@
     calibre
     chromium
     # helm # This is cool little softsynth to play with later, but need the k8s command for now
+    etcher
     kubecolor
     kubectl
     kubernetes-helm
